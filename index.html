@@ -4,20 +4,41 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Decoraciones — Principal</title>
-  <!-- Vinculamos CSS externo -->
-  <link rel="stylesheet" href="css/styles.css" />
-  <!-- Google OAuth -->
-<meta name="google-signin-client_id" content="1051129239562-kjqnel8ib15nqs8g28rhg17vqk55gp2a.apps.googleusercontent.com">
-<script src="https://apis.google.com/js/platform.js" async defer></script>
 
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+  <!-- Estilos personalizados -->
+  <link rel="stylesheet" href="css/styles.css" />
+
+  <!-- Google OAuth -->
+  <meta name="google-signin-client_id" content="1051129239562-kjqnel8ib15nqs8g28rhg17vqk55gp2a.apps.googleusercontent.com">
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script>
 </head>
 <body>
   <header>
     <div class="nav-container">
-<div class="brand">
-<button class="login-btn" onclick="loginConGoogle()">Iniciar sesión con Google</button>
+      <div class="brand">
+        <div id="g_id_onload"
+             data-client_id="1051129239562-kjqnel8ib15nqs8g28rhg17vqk55gp2a.apps.googleusercontent.com"
+             data-callback="handleCredentialResponse"
+             data-auto_prompt="false">
+        </div>
 
-</div>
+        <div class="g_id_signin"
+             data-type="standard"
+             data-size="large"
+             data-theme="outline"
+             data-text="sign_in_with"
+             data-shape="rectangular"
+             data-logo_alignment="left">
+        </div>
+        
+      </div>
 
       <nav>
         <button class="hamburger" aria-label="Abrir menú" onclick="toggleMenu()">☰</button>
@@ -26,6 +47,16 @@
           <li><a href="detalles.html">Detalles</a></li>
           <li><a href="desayunos.html">Desayuno</a></li>
           <li><a href="flores.html">Flores</a></li>
+          <li class="mas-menu">
+            <button onclick="toggleMasMenu()">Más ▾</button>
+            <ul class="submenu hidden" id="masSubmenu">
+              <li><a href="caballeros-detalles.html">Detalles caballeros</a></li>
+              <li><a href="caballeros-desayunos.html">Desayunos caballeros</a></li>
+              <li><a href="ninos-detalles.html">Detalles de niños</a></li>
+              <li><a href="rosas-eternas.html">Rosas eternas</a></li>
+              <li><a href="#" onclick="agregarSeccion()">Agregar un nuevo producto</a></li>
+            </ul>
+          </li>
         </ul>
       </nav>
     </div>
@@ -36,67 +67,179 @@
       <div class="hero-card hero-left">
         <h1>Bienvenido a DIPTE Creaciones</h1>
         <p>Inspírate con nuestros eventos y arreglos.</p>
-        <img src="img/LOGO.png" alt="Logo DIPTE Creaciones" class="logo-img">
+<img src="img/LOGO.png" alt="Logo DIPTE Creaciones" class="logo-img" id="logoDIPTE" onclick="mostrarQuienesSomos()">
+
+<div id="overlay" class="overlay hidden" onclick="this.classList.add('hidden')">
+  <div class="tarjeta" onclick="event.stopPropagation()">
+    <pre id="textoQuienesSomos" class="texto-maquina"></pre>
+  </div>
+</div>
+
+
       </div>
       <aside class="hero-card">
         <img src="img/PORTADA.jpg" alt="Decoración DIPTE" class="hero-img">
       </aside>
     </section>
 
-    <section id="secciones" class="sections">
-      <article class="card">
-        <div class="thumb">EVENTOS</div>
-        <h3>Eventos</h3>
-        <p>Montajes para bodas, cumpleaños y más. Pulsa ver para ir a la página de eventos.</p>
-        <a href="eventos.html">Ir a Eventos</a>
-      </article>
-
-      <article class="card">
-        <div class="thumb">DET</div>
-        <h3>Detalles</h3>
-        <p>Accesorios, centros de mesa y detalles personalizados.</p>
-        <a href="detalles.html">Ir a Detalles</a>
-      </article>
-
-      <article class="card">
-        <div class="thumb">DES</div>
-        <h3>Desayuno</h3>
-        <p>Opciones de desayunos sorpresa y mesas de desayuno para eventos.</p>
-        <a href="desayunos.html">Ir a Desayuno</a>
-      </article>
-
-      <article class="card">
-        <div class="thumb">FLO</div>
-        <h3>Flores</h3>
-        <p>Arreglos florales y ramos para cualquier ocasión.</p>
-        <a href="flores.html">Ir a Flores</a>
-      </article>
-    </section>
-
-    <section id="contacto" class="contacto">
-      <div class="contact-card">
-        <h3>Contacto rápido</h3>
-        <p class="small-info">Escribe tu mensaje y número de contacto.</p>
-        <form id="contactForm">
-          <input type="text" name="nombre" placeholder="Nombre" required>
-          <input type="tel" name="telefono" placeholder="Teléfono / WhatsApp">
-          <textarea name="mensaje" placeholder="Tu mensaje" rows="3"></textarea>
-          <div class="form-buttons">
-            <button class="btn" type="submit">Enviar</button>
-            <button class="btn secondary" type="reset">Limpiar</button>
+    <!-- Carrusel Bootstrap -->
+    <section class="container my-5">
+      <div id="carruselDIPTE" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner rounded-4 shadow-sm">
+          <div class="carousel-item active">
+            <img src="img/MORELIA1.jpg" class="d-block w-100" alt="Decoración 1">
           </div>
-        </form>
+          <div class="carousel-item">
+            <img src="img/MORELIA2.jpg" class="d-block w-100" alt="Decoración 1">
+          </div>
+          <div class="carousel-item">
+            <img src="img/BARBIE1.jpg" class="d-block w-100" alt="Decoración 2">
+          </div>
+          <div class="carousel-item">
+            <img src="img/BARBIE2.png" class="d-block w-100" alt="Decoración 2">
+          </div>
+          <div class="carousel-item">
+            <img src="img/BARBIE3.png" class="d-block w-100" alt="Decoración 2">
+          </div>
+          <div class="carousel-item">
+            <img src="img/SAFARI1.jpg" class="d-block w-100" alt="Decoración 3">
+          </div>
+          <div class="carousel-item">
+            <img src="img/SAFARI3.jpg" class="d-block w-100" alt="Decoración 3">
+          </div>
+          <div class="carousel-item">
+            <img src="img/ALAY1.png" class="d-block w-100" alt="Decoración 4">
+          </div>
+          <div class="carousel-item">
+            <img src="img/ALAY2.png" class="d-block w-100" alt="Decoración 4">
+          </div>
+          <div class="carousel-item">
+            <img src="img/HABITACION1.jpg" class="d-block w-100" alt="Decoración 5">
+          </div>
+        </div>
       </div>
     </section>
+<section class="valores">
+  <div class="valores-card mision">
+    <h3>MISIÓN</h3>
+    <p>
+      Crear decoraciones y detalles personalizados que conviertan los momentos especiales de nuestros clientes en recuerdos inolvidables, ofreciendo un servicio cercano, creativo y confiable desde nuestro taller en casa.
+    </p>
+  </div>
+  <div class="valores-card vision">
+    <h3>VISIÓN</h3>
+    <p>
+      Ser un emprendimiento reconocido por la calidad, originalidad y calidez de nuestros servicios, expandiendo nuestra presencia digital y convirtiéndonos en la primera opción de decoración en nuestra comunidad.
+    </p>
+  </div>
+</section>
+<section class="trabajo">
+  <h2>CÓMO TRABAJAMOS</h2>
+  <p class="intro">
+    En DIPTE Creaciones trabajamos desde casa, lo que nos permite mantener una atención cercana, flexible y completamente personalizada. Así es como damos vida a cada proyecto:
+  </p>
+
+  <div class="pasos">
+    <div class="paso">
+      <div class="numero">1</div>
+      <h3>Atención personalizada</h3>
+      <p>Nos contactas por WhatsApp, Facebook o Instagram y conversamos contigo sobre lo que necesitas: tipo de evento, temática, colores, estilo y presupuesto.</p>
+    </div>
+    <div class="paso">
+      <div class="numero">2</div>
+      <h3>Diseño y planificación</h3>
+      <p>Creamos una propuesta visual de acuerdo a tus ideas. Te mostramos opciones de decoración, arreglos y detalles, y ajustamos hasta llegar a lo que realmente buscas.</p>
+    </div>
+    <div class="paso">
+      <div class="numero">3</div>
+      <h3>Producción artesanal</h3>
+      <p>Cada pieza la elaboramos con dedicación desde nuestro taller en casa: centros de mesa, arreglos, detalles, fondos, ambientaciones y más. Cuidamos materiales, acabados y presentación.</p>
+    </div>
+    <div class="paso">
+      <div class="numero">4</div>
+      <h3>Montaje profesional</h3>
+      <p>El día del evento nos encargamos del montaje completo, organizando cada elemento con precisión para que el espacio quede impecable, armonioso y listo para deslumbrar.</p>
+    </div>
+    <div class="paso">
+      <div class="numero">5</div>
+      <h3>Entrega de detalles</h3>
+      <p>Si son regalos o detalles personalizados, los entregamos en el tiempo acordado, cuidadosamente empacados y listos para sorprender.</p>
+    </div>
+    <div class="paso">
+      <div class="numero">6</div>
+      <h3>Seguimiento y confianza</h3>
+      <p>Nos mantenemos en comunicación contigo antes, durante y después de tu evento. Nuestro objetivo es que vivas una experiencia tranquila, confiable y memorable.</p>
+    </div>
+  </div>
+</section>
+
   </main>
 
-  <footer>
-    © <span id="year"></span> Decoraciones — Hecho con cariño
-  </footer>
+<footer class="footer">
+  <div class="footer-content">
+    <div class="redes">
+      <a href="https://www.tiktok.com/@diptecreaciones" target="_blank"><img src="img/TIKTOK.PNG" alt="TikTok"></a>
+      <a href="https://www.facebook.com/diptecreaciones/" target="_blank"><img src="img/FACEBOOK.PNG" alt="Facebook"></a>
+      <a href="https://api.whatsapp.com/send?phone=593960096686&text=%C2%A1Hola!%20%E2%9C%A8%20%C2%BFQuieres%20saber%20c%C3%B3mo%20crear%20un%20momento%20m%C3%A1gico%3F%0A%0APresiona%20%22Enviar%20mensaje%22%20y%20te%20dar%C3%A9%20ideas%20incre%C3%ADbles%20para%20sorprender%20a%20tus%20seres%20queridos." target="_blank"><img src="img/WHATSAPP.PNG" alt="WhatsApp"></a>
+      <a href="https://www.instagram.com/diptecreaciones/" target="_blank"><img src="img/INSTAGRAM.PNG" alt="Instagram"></a>
+    </div>
+
+    <div class="info-footer">
+      <p><strong>Dirección:</strong> Barrio 15 de Marzo</p>
+      <p><strong>Horario:</strong> Lunes a sábado, 9h–18h</p>
+      <p><strong>Correo:</strong> diptecreations@gmail.com</p>
+    </div>
+
+    <div class="botones-footer">
+      <button onclick="abrirVentana('valores')" class="footer-btn">Nuestros Valores</button>
+      <button onclick="abrirVentana('ofrecemos')" class="footer-btn">¿Qué ofrecemos?</button>
+    </div>
+
+    <p class="copyright">© 2025 DIPTE Creaciones – Todos los derechos reservados.</p>
+  </div>
+
+  <div id="ventanaValores" class="ventana hidden">
+    <div class="ventana-card">
+<button class="cerrar-btn" onclick="cerrarVentanas()">✖</button>
+
+
+      <h3>NUESTROS VALORES</h3>
+      <ul>
+        <li><strong>Creatividad:</strong> Cada diseño es único, pensado para cada cliente.</li>
+        <li><strong>Compromiso:</strong> Cumplimos tiempos, detalles y expectativas.</li>
+        <li><strong>Calidad:</strong> Materiales y acabados de alto nivel.</li>
+        <li><strong>Atención personalizada:</strong> Trato cálido y cercano en cada proceso.</li>
+        <li><strong>Pasión por celebrar:</strong> Amamos ser parte de tus momentos especiales.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div id="ventanaOfrecemos" class="ventana hidden">
+    <div class="ventana-card">
+<button class="cerrar-btn" onclick="cerrarVentanas()">✖</button>
+
+      <h3>¿QUÉ OFRECEMOS?</h3>
+      <ul>
+        <li><strong>Decoración de eventos:</strong> Cumpleaños, 15 años, bodas, graduaciones, bautizos, comuniones, temáticas personalizadas.</li>
+        <li><strong>Detalles personalizados:</strong> Regalos, cajas, flores, globos, arreglos especiales.</li>
+        <li><strong>Desayunos sorpresa:</strong> Presentaciones creativas y listas para entregar.</li>
+        <li><strong>Flores & detalles románticos:</strong> Arreglos florales personalizados para cada ocasión.</li>
+      </ul>
+    </div>
+  </div>
+</footer>
 
   <input id="imageInput" type="file" accept="image/*" style="display:none">
 
-  <!-- Vinculamos JS externo -->
+  <!-- Scripts -->
   <script src="js/scripts.js"></script>
+  <script>
+    const carrusel = document.querySelector('#carruselDIPTE');
+    const carouselInstance = new bootstrap.Carousel(carrusel, {
+      interval: 4000,
+      ride: 'carousel',
+      pause: false
+    });
+  </script>
 </body>
 </html>
