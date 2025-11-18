@@ -38,7 +38,39 @@ input.addEventListener('change', (e)=>{
   }
   reader.readAsDataURL(file);
 });
+const CLIENT_ID = '1051129239562-kjqnel8ib15nqs8g28rhg17vqk55gp2a.apps.googleusercontent.com';
+
 function loginConGoogle() {
-  alert('Simulación: redirigiendo a login con Google...');
-  // Aquí iría la lógica real de autenticación con Google
+  gapi.load('auth2', () => {
+    const auth2 = gapi.auth2.init({ client_id: CLIENT_ID });
+
+    auth2.then(() => {
+      auth2.signIn().then(googleUser => {
+        const profile = googleUser.getBasicProfile();
+        const name = profile.getName();
+        const imageUrl = profile.getImageUrl();
+
+        const avatar = document.createElement('div');
+        avatar.className = 'avatar';
+        if (imageUrl) {
+          const img = document.createElement('img');
+          img.src = imageUrl;
+          img.alt = name;
+          avatar.appendChild(img);
+        } else {
+          avatar.textContent = name.charAt(0).toUpperCase();
+        }
+
+        const brand = document.querySelector('.brand');
+        brand.appendChild(avatar);
+        document.querySelector('.login-btn').style.display = 'none';
+      }).catch(err => {
+        alert("Error al iniciar sesión: " + err.error);
+        console.error(err);
+      });
+    }).catch(err => {
+      alert("Error al inicializar Google Auth: " + err.error);
+      console.error(err);
+    });
+  });
 }
