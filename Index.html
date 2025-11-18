@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Decoraciones — Principal</title>
+  <!-- Vinculamos CSS externo -->
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header>
+    <div class="nav-container">
+<div class="brand">
+  <button class="login-btn" onclick="loginConGoogle()">Iniciar sesión con Google</button>
+</div>
+
+      <nav>
+        <button class="hamburger" aria-label="Abrir menú" onclick="toggleMenu()">☰</button>
+        <ul id="navLinks">
+          <li><a href="eventos.html">Eventos</a></li>                  
+          <li><a href="detalles.html">Detalles</a></li>
+          <li><a href="desayunos.html">Desayuno</a></li>
+          <li><a href="flores.html">Flores</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-card hero-left">
+        <h1>Bienvenido a DIPTE Creaciones</h1>
+        <p>Inspírate con nuestros eventos y arreglos.</p>
+        <img src="img/LOGO.png" alt="Logo DIPTE Creaciones" class="logo-img">
+      </div>
+      <aside class="hero-card">
+        <img src="img/PORTADA.jpg" alt="Decoración DIPTE" class="hero-img">
+      </aside>
+    </section>
+
+    <section id="secciones" class="sections">
+      <article class="card">
+        <div class="thumb">EVENTOS</div>
+        <h3>Eventos</h3>
+        <p>Montajes para bodas, cumpleaños y más. Pulsa ver para ir a la página de eventos.</p>
+        <a href="eventos.html">Ir a Eventos</a>
+      </article>
+
+      <article class="card">
+        <div class="thumb">DET</div>
+        <h3>Detalles</h3>
+        <p>Accesorios, centros de mesa y detalles personalizados.</p>
+        <a href="detalles.html">Ir a Detalles</a>
+      </article>
+
+      <article class="card">
+        <div class="thumb">DES</div>
+        <h3>Desayuno</h3>
+        <p>Opciones de desayunos sorpresa y mesas de desayuno para eventos.</p>
+        <a href="desayunos.html">Ir a Desayuno</a>
+      </article>
+
+      <article class="card">
+        <div class="thumb">FLO</div>
+        <h3>Flores</h3>
+        <p>Arreglos florales y ramos para cualquier ocasión.</p>
+        <a href="flores.html">Ir a Flores</a>
+      </article>
+    </section>
+
+    <section id="contacto" class="contacto">
+      <div class="contact-card">
+        <h3>Contacto rápido</h3>
+        <p class="small-info">Escribe tu mensaje y número de contacto.</p>
+        <form id="contactForm">
+          <input type="text" name="nombre" placeholder="Nombre" required>
+          <input type="tel" name="telefono" placeholder="Teléfono / WhatsApp">
+          <textarea name="mensaje" placeholder="Tu mensaje" rows="3"></textarea>
+          <div class="form-buttons">
+            <button class="btn" type="submit">Enviar</button>
+            <button class="btn secondary" type="reset">Limpiar</button>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © <span id="year"></span> Decoraciones — Hecho con cariño
+  </footer>
+
+  <input id="imageInput" type="file" accept="image/*" style="display:none">
+
+  <!-- Vinculamos JS externo -->
+  <script src="js/scripts.js"></script>
+</body>
+</html>
