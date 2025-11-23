@@ -1,0 +1,260 @@
+:root {
+  --vino: #6b0f1a;
+  --blanco: #ffffff;
+}
+
+body {
+  background-color: #f9f9f9;
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+}
+
+/* ========== ENCABEZADO ========== */
+/* Separación visual del header y fondo claro */
+.titulo-externo {
+  background: #f9f9f9;
+  padding: 20px 20px 0;
+  text-align: center;
+  border-top: 1px solid rgba(11,11,11,0.06); /* hace el corte más limpio */
+}
+
+/* Estilo del título afuera del header */
+.titulo-externo .titulo-roles {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #6b0f1a; /* conchevino de marca para el título */
+  margin: 0;
+}
+
+/* Compacta el header para que no “invada” hacia abajo */
+header {
+  background: var(--vino);
+  border-bottom: 1px solid rgba(11,11,11,0.06);
+  padding-bottom: 0; /* antes 12px */
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 12px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* ========== CONTENIDO PRINCIPAL ========== */
+.contenedor {
+  max-width: 600px;
+  margin: 2rem auto;
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+input[type="email"] {
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+button {
+  background-color: #b30000;
+  color: white;
+  border: none;
+  padding: 0.7rem 1rem;
+  font-size: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+button:hover {
+  background-color: #990000;
+}
+
+.mensaje {
+  margin-top: 1rem;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* ========== TABLA DE ADMINISTRADORES ========== */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1.5rem;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 0.8rem;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+  color: #333;
+}
+
+td button {
+  margin-right: 0.5rem;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.9rem;
+}
+
+td button:first-child {
+  background-color: #0077cc;
+}
+
+td button:first-child:hover {
+  background-color: #005fa3;
+}
+
+td button:last-child {
+  background-color: #cc0000;
+}
+
+td button:last-child:hover {
+  background-color: #990000;
+}
+
+/* ========== FOOTER ========== */
+.footer {
+  background: var(--vino);
+  width: 100%;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px 20px;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--blanco);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+}
+
+.redes img {
+  width: 28px;
+  height: 28px;
+  margin: 0 4px;
+}
+
+.info-footer p {
+  margin: 2px 0;
+  line-height: 1.4;
+}
+
+.botones-footer {
+  gap: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.footer-btn {
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  background: transparent;
+  border: 2px solid var(--blanco);
+  color: var(--blanco);
+  font-weight: 600;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.footer-btn:hover {
+  background: var(--blanco);
+  color: var(--vino);
+  transform: scale(1.05);
+}
+.user-block {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.avatar img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  box-shadow: 0 0 6px rgba(0,0,0,0.2);
+  transition: transform 0.3s ease;
+  object-fit: cover;
+}
+
+.avatar img:hover {
+  transform: scale(1.05);
+}
+
+.saludo {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--blanco);
+  white-space: nowrap;
+}
+
+.logout-btn {
+  background: transparent;
+  border: 2px solid var(--blanco);
+  color: var(--blanco);
+  font-size: 0.85rem;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.logout-btn:hover {
+  background: var(--blanco);
+  color: var(--vino);
+  transform: scale(1.05);
+}
+
+.logout-btn.hidden {
+  display: none;
+}
+
+.logout-btn.visible {
+  display: inline-block;
+  margin-left: 8px;
+}
+.titulo-externo {
+  background: #f9f9f9;
+  padding: 24px 20px 0;
+  text-align: center;
+}
+
+.titulo-externo .titulo-roles {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #6b0f1a;
+  margin: 0;
+}

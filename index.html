@@ -14,53 +14,42 @@
   <!-- Estilos personalizados -->
   <link rel="stylesheet" href="css/styles.css" />
 
-  <!-- Google OAuth -->
-  <meta name="google-signin-client_id" content="1051129239562-kjqnel8ib15nqs8g28rhg17vqk55gp2a.apps.googleusercontent.com">
-  <script src="https://accounts.google.com/gsi/client" async defer></script>
-  <script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script>
 </head>
 <body>
   <header>
-    <div class="nav-container">
-      <div class="brand">
-        <div id="g_id_onload"
-             data-client_id="1051129239562-kjqnel8ib15nqs8g28rhg17vqk55gp2a.apps.googleusercontent.com"
-             data-callback="handleCredentialResponse"
-             data-auto_prompt="false">
-        </div>
-
-        <div class="g_id_signin"
-             data-type="standard"
-             data-size="large"
-             data-theme="outline"
-             data-text="sign_in_with"
-             data-shape="rectangular"
-             data-logo_alignment="left">
-        </div>
-        
-      </div>
-
-      <nav>
-        <button class="hamburger" aria-label="Abrir menú" onclick="toggleMenu()">☰</button>
-        <ul id="navLinks">
-          <li><a href="eventos.html">Eventos</a></li>                  
-          <li><a href="detalles.html">Detalles</a></li>
-          <li><a href="desayunos.html">Desayuno</a></li>
-          <li><a href="flores.html">Flores</a></li>
-          <li class="mas-menu">
-            <button onclick="toggleMasMenu()">Más ▾</button>
-            <ul class="submenu hidden" id="masSubmenu">
-              <li><a href="caballeros-detalles.html">Detalles caballeros</a></li>
-              <li><a href="caballeros-desayunos.html">Desayunos caballeros</a></li>
-              <li><a href="ninos-detalles.html">Detalles de niños</a></li>
-              <li><a href="rosas-eternas.html">Rosas eternas</a></li>
-              <li><a href="#" onclick="agregarSeccion()">Agregar un nuevo producto</a></li>
-            </ul>
-          </li>
-        </ul>
-      </nav>
+  <div class="nav-container d-flex justify-content-between align-items-center px-4 py-2">
+    
+    <!-- Bloque izquierdo: Login y saludo -->
+    <div class="brand d-flex align-items-center gap-3">
+      <button onclick="loginConSupabase()" id="loginBtn" class="btn btn-primary">Iniciar sesión con Google</button>
+      <!-- Aquí se insertará el saludo y avatar dinámicamente -->
     </div>
-  </header>
+
+    <!-- Bloque derecho: Menú de navegación -->
+    <nav>
+      <ul id="navLinks" class="d-flex gap-4 list-unstyled mb-0">
+        <li><a href="eventos.html">Eventos</a></li>
+        <li><a href="detalles.html">Detalles dama</a></li>
+        <li><a href="desayunos.html">Desayunos dama</a></li>
+        <li><a href="flores.html">Flores</a></li>
+        <li class="mas-menu position-relative">
+          <button onclick="toggleMasMenu()">Más ▾</button>
+          <ul class="submenu hidden position-absolute bg-white p-2 border rounded" id="masSubmenu">
+            <li><a href="caballeros-detalles.html">Detalles caballeros</a></li>
+            <li><a href="caballeros-desayunos.html">Desayunos caballeros</a></li>
+            <li><a href="ninos-detalles.html">Detalles de niños</a></li>
+            <li><a href="rosas-eternas.html">Rosas eternas</a></li>
+<li><a href="agregar-producto.html" id="agregarProductoBtn">Agregar un nuevo producto</a></li>
+
+            <li><a href="roles.html" id="administrarRolesBtn">Administrar roles</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+
+  </div>
+</header>
+
 
   <main>
     <section class="hero">

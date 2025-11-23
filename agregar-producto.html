@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agregar nuevo producto</title>
+
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/agregar-producto.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+  <header>
+    <div class="nav-container d-flex justify-content-between align-items-center px-4 py-2">
+      <div class="brand d-flex align-items-center gap-3">
+        <button onclick="loginConSupabase()" id="loginBtn" class="btn btn-primary">Iniciar sesión con Google</button>
+      </div>
+      <div>
+        <button onclick="location.href='index.html'" class="btn secondary">Volver al inicio</button>
+      </div>
+    </div>
+  </header>
+
+  <section class="titulo-externo">
+    <h1 class="titulo-producto">Agregar nuevo producto</h1>
+  </section>
+
+  <main>
+    <section class="contenedor">
+      <form id="productoForm">
+        <label for="imagen">Foto del producto:</label>
+        <input type="file" id="imagen" accept="image/*" required />
+
+        <label for="titulo">Título:</label>
+        <input type="text" id="titulo" required />
+
+        <label for="precio">Precio:</label>
+        <input type="number" id="precio" required />
+
+        <label for="descripcion">Descripción:</label>
+        <textarea id="descripcion" rows="4" required></textarea>
+
+        <label for="categoria">Categoría:</label>
+        <select id="categoria" required>
+          <option value="">Selecciona una categoría</option>
+          <option value="detalles">Detalles dama</option>
+          <option value="desayunos">Desayunos dama</option>
+          <option value="caballeros-detalles">Detalles caballeros</option>
+          <option value="caballeros-desayunos">Desayunos caballeros</option>
+          <option value="ninos-detalles">Detalles niños</option>
+          <option value="flores">Flores</option>
+          <option value="rosas-eternas">Rosas eternas</option>
+          <option value="eventos">Eventos</option>
+        </select>
+
+        <button type="submit">Guardar producto</button>
+      </form>
+
+      <div id="previewCard" class="tarjeta hidden"></div>
+      <div id="mensajeProducto" class="mensaje"></div>
+    </section>
+  </main>
+
+  <script src="js/agregar-producto.js"></script>
+</body>
+</html>
