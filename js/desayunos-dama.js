@@ -13,7 +13,7 @@ async function loginConSupabase() {
 }
 
 function toggleMasMenu(event) {
-  event.stopPropagation(); // evita que el clic se propague
+  event.stopPropagation();
   const submenu = document.getElementById('masSubmenu');
   const menuWrapper = document.querySelector('.mas-menu');
   if (!submenu || !menuWrapper) return;
@@ -27,14 +27,11 @@ document.addEventListener('click', (e) => {
   const menuWrapper = document.querySelector('.mas-menu');
   if (!submenu || !menuWrapper) return;
 
-  const clickedInside = menuWrapper.contains(e.target);
-
-  if (!clickedInside) {
+  if (!menuWrapper.contains(e.target)) {
     submenu.classList.add('hidden');
     menuWrapper.classList.remove('open');
   }
 });
-
 
 // ========== Renderizar usuario en el header ==========
 function renderUserUI(name, imageUrl) {
@@ -101,7 +98,7 @@ async function cargarProductos() {
   const { data, error } = await sb
     .from('productos')
     .select('*')
-    .eq('categoria', 'detalles-dama')
+    .eq('categoria', 'desayunos-dama')   // 🔥 Adaptado a desayunos-dama
     .order('created_at', { ascending: false });
 
   console.log('Productos recibidos:', data);
@@ -116,45 +113,44 @@ async function cargarProductos() {
     galeria.innerHTML = '<p>No hay productos disponibles aún.</p>';
     return;
   }
-window.productos = data;
+  window.productos = data;
 
   data.forEach((producto) => {
     const tarjeta = document.createElement('div');
     tarjeta.className = 'tarjeta';
-    tarjeta.style.position = 'relative'; // para posicionar el menú
+    tarjeta.style.position = 'relative';
 
     const role = localStorage.getItem('userRole') || 'anon';
-const raw = producto.imagen_url?.trim() || '';
-const imagenes = raw.includes('|||')
-  ? raw.split('|||').map(img => img.trim()).filter(img => img.startsWith('data:image'))
-  : [raw];
+    const raw = producto.imagen_url?.trim() || '';
+    const imagenes = raw.includes('|||')
+      ? raw.split('|||').map(img => img.trim()).filter(img => img.startsWith('data:image'))
+      : [raw];
 
-const imagen = imagenes[0] || 'img/default.png';
-tarjeta.innerHTML = `
-  <div class="tarjeta-contenido">
-    <div class="imagen-wrapper">
-      <img src="${imagen}" alt="${producto.titulo}" onclick="expandirTarjeta('${producto.id}')">
-      <div class="info-basica" onclick="expandirTarjeta('${producto.id}')">
-        <h3>${producto.titulo}</h3>
-        <p>$${producto.precio}</p>
-      </div>
-      <div class="overlay" onclick="expandirTarjeta('${producto.id}')">
-        <span>Ver más</span>
-      </div>
-    </div>
-
-    ${role === 'admin' ? `
-      <div class="menu-admin" onclick="event.stopPropagation()">
-        <button class="menu-btn" onclick="toggleMenu('${producto.id}'); event.stopPropagation();">⋮</button>
-        <div id="menu-${producto.id}" class="menu-opciones hidden">
-          <button onclick="actualizarProducto('${producto.id}'); event.stopPropagation();">Actualizar</button>
-          <button onclick="eliminarProducto('${producto.id}'); event.stopPropagation();">Eliminar</button>
+    const imagen = imagenes[0] || 'img/default.png';
+    tarjeta.innerHTML = `
+      <div class="tarjeta-contenido">
+        <div class="imagen-wrapper">
+          <img src="${imagen}" alt="${producto.titulo}" onclick="expandirTarjeta('${producto.id}')">
+          <div class="info-basica" onclick="expandirTarjeta('${producto.id}')">
+            <h3>${producto.titulo}</h3>
+            <p>$${producto.precio}</p>
+          </div>
+          <div class="overlay" onclick="expandirTarjeta('${producto.id}')">
+            <span>Ver más</span>
+          </div>
         </div>
-      </div>
-    ` : ''}
-  </div>
-`;
 
+        ${role === 'admin' ? `
+          <div class="menu-admin" onclick="event.stopPropagation()">
+            <button class="menu-btn" onclick="toggleMenu('${producto.id}'); event.stopPropagation();">⋮</button>
+            <div id="menu-${producto.id}" class="menu-opciones hidden">
+              <button onclick="actualizarProducto('${producto.id}'); event.stopPropagation();">Actualizar</button>
+              <button onclick="eliminarProducto('${producto.id}'); event.stopPropagation();">Eliminar</button>
+            </div>
+          </div>
+        ` : ''}
+      </div>
+    `;
     galeria.appendChild(tarjeta);
   });
 }
@@ -232,8 +228,6 @@ async function eliminarProducto(id) {
   }
 }
 
-
-
 // ========== Restaurar sesión si existe ==========
 document.addEventListener('DOMContentLoaded', async () => {
   let role = 'anon';
@@ -257,23 +251,23 @@ document.addEventListener('DOMContentLoaded', async () => {
     renderUserUI(name, imageUrl);
   }
 
-if (role !== 'admin') {
-  const adminOpcionesProducto = document.getElementById('adminOpcionesProducto');
-  const adminOpcionesRoles = document.getElementById('adminOpcionesRoles');
+  // Ocultar opciones de admin si no es administrador
+  if (role !== 'admin') {
+    const adminOpcionesProducto = document.getElementById('adminOpcionesProducto');
+    const adminOpcionesRoles = document.getElementById('adminOpcionesRoles');
 
-  if (adminOpcionesProducto) adminOpcionesProducto.style.display = 'none';
-  if (adminOpcionesRoles) adminOpcionesRoles.style.display = 'none';
-}
+    if (adminOpcionesProducto) adminOpcionesProducto.style.display = 'none';
+    if (adminOpcionesRoles) adminOpcionesRoles.style.display = 'none';
+  }
 
   await cargarProductos();
 });
 
-
+// ========== Expandir tarjeta ==========
 function expandirTarjeta(id) {
   const producto = window.productos.find(p => p.id === id);
   if (!producto) return;
 
-  // Separador personalizado: |||
   const raw = producto.imagen_url?.trim() || '';
   const imagenes = raw.includes('|||')
     ? raw.split('|||').map(img => img.trim()).filter(img => img.startsWith('data:image'))
@@ -303,6 +297,7 @@ function expandirTarjeta(id) {
   modal.style.display = 'flex';
   modal.classList.add('animar-expandido');
 }
+
 function cerrarTarjetaExpandida() {
   clearInterval(window.carruselInterval);
   const modal = document.getElementById('tarjetaExpandida');

@@ -111,6 +111,7 @@ if (imageInput) {
 function applyRoleUI() {
   const role = localStorage.getItem('userRole') || 'user';
 
+  // Botones fuera del menú
   const agregarBtn = document.getElementById('agregarProductoBtn');
   if (agregarBtn) {
     agregarBtn.style.display = role === 'admin' ? 'inline-block' : 'none';
@@ -120,7 +121,20 @@ function applyRoleUI() {
   if (rolesBtn) {
     rolesBtn.style.display = role === 'admin' ? 'inline-block' : 'none';
   }
+
+  // Opciones dentro del menú "Más"
+  const adminOpcionesProducto = document.getElementById('adminOpcionesProducto');
+  const adminOpcionesRoles = document.getElementById('adminOpcionesRoles');
+
+  if (adminOpcionesProducto) {
+    adminOpcionesProducto.style.display = role === 'admin' ? 'block' : 'none';
+  }
+
+  if (adminOpcionesRoles) {
+    adminOpcionesRoles.style.display = role === 'admin' ? 'block' : 'none';
+  }
 }
+
 
 // Renderiza el bloque de usuario en el header y aplica roles
 function renderUserUI(name, imageUrl) {
