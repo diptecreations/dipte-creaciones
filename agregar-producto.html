@@ -30,7 +30,10 @@
     <section class="contenedor">
       <form id="productoForm">
         <label for="imagen">Foto del producto:</label>
-        <input type="file" id="imagen" accept="image/*" required />
+        <div class="imagen-preview">
+          <input type="file" id="imagen" accept="image/*" multiple required />
+          <div id="miniaturas" class="galeria-miniaturas"></div>
+        </div>
 
         <label for="titulo">Título:</label>
         <input type="text" id="titulo" required />
@@ -44,7 +47,7 @@
         <label for="categoria">Categoría:</label>
         <select id="categoria" required>
           <option value="">Selecciona una categoría</option>
-          <option value="detalles">Detalles dama</option>
+          <option value="detalles-dama">Detalles dama</option>
           <option value="desayunos">Desayunos dama</option>
           <option value="caballeros-detalles">Detalles caballeros</option>
           <option value="caballeros-desayunos">Desayunos caballeros</option>
@@ -57,10 +60,33 @@
         <button type="submit">Guardar producto</button>
       </form>
 
-      <div id="previewCard" class="tarjeta hidden"></div>
       <div id="mensajeProducto" class="mensaje"></div>
     </section>
   </main>
+
+  <footer class="footer fondo-vino">
+    <div class="footer-container">
+      <div class="redes">
+        <a href="https://www.tiktok.com/@diptecreaciones" target="_blank"><img src="img/TIKTOK.PNG" alt="TikTok"></a>
+        <a href="https://www.facebook.com/diptecreaciones/" target="_blank"><img src="img/FACEBOOK.PNG" alt="Facebook"></a>
+        <a href="https://api.whatsapp.com/send?phone=593960096686" target="_blank"><img src="img/WHATSAPP.PNG" alt="WhatsApp"></a>
+        <a href="https://www.instagram.com/diptecreaciones/" target="_blank"><img src="img/INSTAGRAM.PNG" alt="Instagram"></a>
+      </div>
+
+      <div class="info-footer">
+        <p><strong>Dirección:</strong> Barrio 15 de Marzo</p>
+        <p><strong>Horario:</strong> Lunes a sábado, 9h–18h</p>
+        <p><strong>Correo:</strong> diptecreations@gmail.com</p>
+      </div>
+
+      <div class="botones-footer">
+        <button onclick="abrirVentana('valores')" class="footer-btn">Nuestros Valores</button>
+        <button onclick="abrirVentana('ofrecemos')" class="footer-btn">¿Qué ofrecemos?</button>
+      </div>
+
+      <p class="copyright">© 2025 DIPTE Creaciones – Todos los derechos reservados.</p>
+    </div>
+  </footer>
 
   <script src="js/agregar-producto.js"></script>
 </body>

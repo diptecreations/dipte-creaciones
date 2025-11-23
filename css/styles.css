@@ -267,31 +267,48 @@ nav a:hover {
 .mas-menu > button:hover {
   background: rgba(107,15,26,0.08);
 }
-
 .submenu {
-  position: absolute;
-  top: 42px;
-  right: 0;
-  background: var(--blanco);
-  border-radius: 12px;
-  box-shadow: 0 8px 28px rgba(11,11,11,0.08);
-  padding: 10px;
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 6px;
-  z-index: 50;
+  padding: 10px 16px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  z-index: 100;
+}
+.submenu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+}
+
+.submenu.hidden {
+  display: none !important;
+}
+
+
+.submenu li {
+  list-style: none;
+  width: 100%;
+  text-align: center; /* ← Esto centra el texto */
 }
 
 .submenu li a {
-  padding: 6px 10px;
-  border-radius: 6px;
+  display: inline-block;
+  padding: 6px 12px;
+  color: #333;
   text-decoration: none;
-  color: var(--negro);
-  font-weight: 500;
+  font-size: 0.95rem;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
 }
 
 .submenu li a:hover {
-  background: rgba(107,15,26,0.08);
+  background-color: #f0f0f0;
+  color: #8b1c2c;
 }
 
 .hidden {
@@ -657,4 +674,13 @@ nav a:hover {
 
 .cerrar-btn:hover {
   transform: scale(1.2);
+}
+#navLinks li.activo a {
+  color: #fff;
+  font-weight: 700;
+  background-color: #8b1c2c;
+  padding: 6px 12px;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  transition: background-color 0.3s ease;
 }

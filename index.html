@@ -29,21 +29,21 @@
     <nav>
       <ul id="navLinks" class="d-flex gap-4 list-unstyled mb-0">
         <li><a href="eventos.html">Eventos</a></li>
-        <li><a href="detalles.html">Detalles dama</a></li>
-        <li><a href="desayunos.html">Desayunos dama</a></li>
+        <li><a href="detalles-dama.html">Detalles dama</a></li>
+        <li><a href="desayunos-dama.html">Desayunos dama</a></li>
         <li><a href="flores.html">Flores</a></li>
-        <li class="mas-menu position-relative">
-          <button onclick="toggleMasMenu()">Más ▾</button>
-          <ul class="submenu hidden position-absolute bg-white p-2 border rounded" id="masSubmenu">
-            <li><a href="caballeros-detalles.html">Detalles caballeros</a></li>
-            <li><a href="caballeros-desayunos.html">Desayunos caballeros</a></li>
-            <li><a href="ninos-detalles.html">Detalles de niños</a></li>
-            <li><a href="rosas-eternas.html">Rosas eternas</a></li>
-<li><a href="agregar-producto.html" id="agregarProductoBtn">Agregar un nuevo producto</a></li>
+       <li class="mas-menu position-relative">
+      <button onclick="toggleMasMenu(event)" class="btn-mas">Más ▾</button>
+      <ul id="masSubmenu" class="submenu hidden">
+        <li><a href="caballeros-detalles.html">Detalles caballeros</a></li>
+        <li><a href="caballeros-desayunos.html">Desayunos caballeros</a></li>
+        <li><a href="ninos-detalles.html">Detalles de niños</a></li>
+        <li><a href="rosas-eternas.html">Rosas eternas</a></li>
+        <li id="adminOpciones" class="admin-opcion"><a href="agregar-producto.html">Agregar un nuevo producto</a></li>
+        <li class="admin-opcion"><a href="roles.html">Administrar roles</a></li>
+      </ul>
+    </li>
 
-            <li><a href="roles.html" id="administrarRolesBtn">Administrar roles</a></li>
-          </ul>
-        </li>
       </ul>
     </nav>
 

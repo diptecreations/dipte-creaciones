@@ -14,11 +14,28 @@ function toggleMenu() {
   ul.style.display = ul.style.display === 'flex' ? 'none' : 'flex';
 }
 
-function toggleMasMenu() {
+function toggleMasMenu(event) {
+  event.stopPropagation(); // evita que el clic se propague
   const submenu = document.getElementById('masSubmenu');
-  if (!submenu) return;
+  const menuWrapper = document.querySelector('.mas-menu');
+  if (!submenu || !menuWrapper) return;
+
   submenu.classList.toggle('hidden');
+  menuWrapper.classList.toggle('open');
 }
+
+document.addEventListener('click', (e) => {
+  const submenu = document.getElementById('masSubmenu');
+  const menuWrapper = document.querySelector('.mas-menu');
+  if (!submenu || !menuWrapper) return;
+
+  const clickedInside = menuWrapper.contains(e.target);
+
+  if (!clickedInside) {
+    submenu.classList.add('hidden');
+    menuWrapper.classList.remove('open');
+  }
+});
 
 function mostrarQuienesSomos() {
   const overlay = document.getElementById('overlay');
