@@ -225,10 +225,11 @@ function protectAdminPage() {
 async function loginConSupabase() {
   const { data, error } = await sb.auth.signInWithOAuth({
     provider: 'google',
-    options: { redirectTo: 'http://localhost:5500/index.html' } // ajusta según tu entorno
+    options: { redirectTo: 'https://diptecreations.github.io/dipte-creaciones/' } 
   });
   if (error) console.error('Error al iniciar sesión:', error.message);
 }
+
 
 // ========================
 // 11) Restaurar sesión al cargar
