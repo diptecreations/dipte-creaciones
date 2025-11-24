@@ -225,7 +225,7 @@ function protectAdminPage() {
 async function loginConSupabase() {
   const { data, error } = await sb.auth.signInWithOAuth({
     provider: 'google',
-    options: { redirectTo: 'https://diptecreations.github.io/dipte-creaciones/' } 
+    options: { redirectTo: 'https://diptecreations.github.io/dipte-creaciones/index.html' } 
   });
   if (error) console.error('Error al iniciar sesión:', error.message);
 }

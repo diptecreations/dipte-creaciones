@@ -184,7 +184,7 @@ async function editarAdmin(emailOriginal) {
 async function loginConSupabase() {
   const { data, error } = await sb.auth.signInWithOAuth({
     provider: 'google',
-    options: { redirectTo: 'https://diptecreations.github.io/roles.html' }
+    options: { redirectTo: 'https://diptecreations.github.io/dipte-creaciones/roles.html' }
   });
   if (error) console.error('Error al iniciar sesión:', error.message);
 }
