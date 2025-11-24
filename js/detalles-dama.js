@@ -60,7 +60,8 @@ function renderUserUI(name, imageUrl) {
   avatar.className = 'avatar';
 
   const img = document.createElement('img');
-  img.src = imageUrl && imageUrl.startsWith('http') ? imageUrl : 'img/default.png';
+ img.src = imageUrl && imageUrl.startsWith('http') ? imageUrl : '../img/default.png';
+
   img.alt = name;
   img.style.width = '32px';
   img.style.height = '32px';
@@ -86,7 +87,8 @@ function renderUserUI(name, imageUrl) {
   logoutBtn.onclick = async () => {
     await sb.auth.signOut();
     localStorage.clear();
-    location.href = 'index.html';
+location.href = '../index.html';
+
   };
 
   existing.appendChild(avatar);
@@ -129,7 +131,8 @@ const imagenes = raw.includes('|||')
   ? raw.split('|||').map(img => img.trim()).filter(img => img.startsWith('data:image'))
   : [raw];
 
-const imagen = imagenes[0] || 'img/default.png';
+const imagen = imagenes[0] || '../img/default.png';
+
 tarjeta.innerHTML = `
   <div class="tarjeta-contenido">
     <div class="imagen-wrapper">
@@ -243,7 +246,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   if (user) {
     const name = user.user_metadata?.name || 'Usuario';
-    const imageUrl = user.user_metadata?.avatar_url || 'img/default.png';
+const imageUrl = user.user_metadata?.avatar_url || '../img/default.png';
+
     const email = user.email;
 
     const { data: rolData, error: rolError } = await sb
@@ -280,7 +284,8 @@ function expandirTarjeta(id) {
     : [raw];
 
   if (imagenes.length === 0) {
-    imagenes.push('img/default.png');
+imagenes.push('../img/default.png');
+
   }
 
   let index = 0;
