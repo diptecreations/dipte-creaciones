@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Foro de comentarios</title>
+  <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/foro.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+<header>
+  <div class="nav-container d-flex justify-content-between align-items-center px-4 py-2">
+    <!-- Bloque izquierdo: Login y saludo -->
+    <div class="brand d-flex align-items-center gap-3">
+      <button onclick="loginConSupabase()" id="loginBtn" class="btn btn-primary">Iniciar sesión con Google</button>
+      <!-- Aquí se insertará el saludo y avatar dinámicamente -->
+    </div>
+    
+<div class="volver-inicio">
+  <button onclick="history.back()" class="btn secondary">← Regresar atrás</button>
+</div>
+
+    <!-- Bloque derecho: Menú de navegación -->
+    <nav>
+      <ul id="navLinks" class="d-flex gap-4 list-unstyled mb-0">
+        <li><a href="eventos.html">Eventos</a></li>
+        <li><a href="detalles-dama.html">Detalles dama</a></li>
+        <li><a href="desayunos-dama.html">Desayunos dama</a></li>
+        <li><a href="flores.html">Flores</a></li>
+        <li class="mas-menu position-relative">
+          <button onclick="toggleMasMenu(event)" class="btn-mas">Más ▾</button>
+          <ul id="masSubmenu" class="submenu hidden">
+            <li><a href="caballeros-detalles.html">Detalles caballeros</a></li>
+            <li><a href="caballeros-desayunos.html">Desayunos caballeros</a></li>
+            <li><a href="ninos-detalles.html">Detalles de niños</a></li>
+            <li><a href="rosas-eternas.html">Rosas eternas</a></li>
+            <li id="adminOpcionesProducto"><a href="agregar-producto.html">Agregar un nuevo producto</a></li>
+            <li id="adminOpcionesRoles"><a href="roles.html">Administrar roles</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+<section class="titulo-externo">
+  <h1 class="titulo-producto">Foro de comentarios</h1>
+  <p>Aquí puedes leer las opiniones de otros usuarios y dejar la tuya.</p>
+</section>
+
+<main>
+  <!-- Formulario para comentar -->
+  <section id="formularioComentario" class="hidden">
+    <h2>Deja tu comentario</h2>
+    <textarea id="nuevoComentario" placeholder="Escribe tu comentario aquí..." rows="4"></textarea>
+    <button onclick="publicarComentario()" class="btn btn-primary">Publicar</button>
+  </section>
+
+  <!-- Mensaje si no está logueado -->
+  <section id="mensajeLogin" class="hidden">
+    <p>Debes iniciar sesión para dejar un comentario.</p>
+    <button onclick="loginConSupabase()" class="btn btn-primary">Iniciar sesión</button>
+  </section>
+
+  <!-- Lista de comentarios -->
+  <section id="listaComentarios">
+    <h2>Comentarios de la comunidad</h2>
+    <div id="comentariosContainer"></div>
+    <section id="listaComentarios">
+
+
+
+  </section>
+</main>
+<footer class="footer fondo-vino">
+  <div class="footer-container">
+    <div class="redes">
+      <a href="https://www.tiktok.com/@diptecreaciones" target="_blank"><img src="img/TIKTOK.PNG" alt="TikTok"></a>
+      <a href="https://www.facebook.com/diptecreaciones/" target="_blank"><img src="img/FACEBOOK.PNG" alt="Facebook"></a>
+      <a href="https://api.whatsapp.com/send?phone=593960096686" target="_blank"><img src="img/WHATSAPP.PNG" alt="WhatsApp"></a>
+      <a href="https://www.instagram.com/diptecreaciones/" target="_blank"><img src="img/INSTAGRAM.PNG" alt="Instagram"></a>
+    </div>
+
+    <div class="info-footer">
+      <p><strong>Dirección:</strong> Barrio 15 de Marzo</p>
+      <p><strong>Horario:</strong> Lunes a sábado, 9h–18h</p>
+      <p><strong>Correo:</strong> diptecreations@gmail.com</p>
+    </div>
+
+    <div class="botones-footer">
+      <button onclick="abrirVentana('valores')" class="footer-btn">Nuestros Valores</button>
+      <button onclick="abrirVentana('ofrecemos')" class="footer-btn">¿Qué ofrecemos?</button>
+    </div>
+
+    <p class="copyright">© 2025 DIPTE Creaciones – Todos los derechos reservados.</p>
+  </div>
+</footer>
+
+<script src="js/foro.js"></script>
+</body>
+</html>

@@ -309,3 +309,6 @@ function cerrarTarjetaExpandida() {
   modal.style.display = 'none';
   modal.classList.remove('animar-expandido');
 }
+function irAlForo() {
+  window.location.href = 'foro.html';
+}

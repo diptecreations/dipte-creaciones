@@ -304,3 +304,12 @@ function cerrarTarjetaExpandida() {
   modal.style.display = 'none';
   modal.classList.remove('animar-expandido');
 }
+function irAlForo() {
+  const role = localStorage.getItem('userRole') || 'anon';
+  if (role === 'anon') {
+    alert("Debes iniciar sesión para acceder al foro.");
+    loginConSupabase(); // función global
+  } else {
+    location.href = 'foro.html';
+  }
+}
